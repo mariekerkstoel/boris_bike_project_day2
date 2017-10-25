@@ -27,9 +27,9 @@ describe DockingStation do
     expect(station.bike).to eq(test_bike_two)
   end
 
-#  it "Should return error if no bikes available" do
-#    expect{DockingStation.new.release_bike}.to raise_error
-#  end
+ it "Should return error if no bikes available" do
+   expect{DockingStation.new.release_bike}.to raise_error("there are no bike left")
+ end
 
   it "should return bike if bikes available" do
     station2 = DockingStation.new

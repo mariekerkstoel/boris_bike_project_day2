@@ -9,7 +9,7 @@ class DockingStation
     if @bike != nil
       return @bike
     else
-      raise StandardError
+      raise "there are no bike left"
     end
   end
 
@@ -18,5 +18,10 @@ class DockingStation
   def dock(bike)
     @bike = bike
   end
+
+
+
+
+
 
 end
