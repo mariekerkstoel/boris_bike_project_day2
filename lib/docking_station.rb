@@ -1,4 +1,4 @@
-require 'bike.rb'
+require './lib/bike.rb'
 
 
 class DockingStation
