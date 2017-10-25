@@ -3,9 +3,9 @@ require "docking_station"
 describe DockingStation do
   it { is_expected.to respond_to(:release_bike) }
 
-  it "is expected to create a new bike" do
-    expect(DockingStation.new.release_bike).to be_an_instance_of(Bike)
-  end
+#  it "is expected to create a new bike" do
+#    expect(DockingStation.new.release_bike).to be_an_instance_of(Bike)
+#  end
 
   it "expects the bike to be working" do
     expect(Bike.new.working?).to eq true
@@ -25,6 +25,10 @@ describe DockingStation do
     test_bike_two = Bike.new
     station.dock(test_bike_two)
     expect(station.bike).to eq(test_bike_two)
+  end
+
+  it "Should return error if no bikes available" do
+    expect{DockingStation.new.release_bike}.to raise_error
   end
 
 end

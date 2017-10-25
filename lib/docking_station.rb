@@ -6,7 +6,7 @@ class DockingStation
   attr_reader :bike
 
   def release_bike
-    Bike.new
+    raise StandardError
   end
 
   # 'dock' used to store a bike
