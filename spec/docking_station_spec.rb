@@ -20,4 +20,10 @@ describe DockingStation do
     expect(DockingStation.new.dock(test_bike)).to eq(test_bike)
   end
 
+  it "The bike method should return bike" do
+    station = DockingStation.new
+    station.dock(@bike)
+    expect(station.bike).to eq(@bike)
+  end
+
 end
