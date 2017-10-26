@@ -3,10 +3,6 @@ require "docking_station"
 describe DockingStation do
   it { is_expected.to respond_to(:release_bike) }
 
-#  it "is expected to create a new bike" do
-#    expect(DockingStation.new.release_bike).to be_an_instance_of(Bike)
-#  end
-
   it "expects the bike to be working" do
     expect(Bike.new.working?).to eq true
   end
@@ -38,14 +34,6 @@ describe DockingStation do
     expect(station2.release_bike).to eq(bike)
   end
 
-  it "should return false if not full" do
-      expect(subject).to_not be_full
-  end
-  it "should return true if full" do
-    20.times {subject.dock(Bike.new)}
-      expect(subject).to be_full
-  end
-
   it "should raise error if docking station full" do
     20.times{subject.dock(Bike.new)}
     expect{subject.dock(Bike.new)}.to raise_error
@@ -57,6 +45,10 @@ describe DockingStation do
 
   it "should create array when initialized" do
     expect(subject.bikes).to be_a(Array)
+  end
+
+  it "should initialize with a capacity of 20" do
+    expect(subject.capacity).to eq(DockingStation::DEFAULT_CAPACITY)
   end
 
 
