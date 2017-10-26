@@ -1,9 +1,24 @@
 require "docking_station"
 
 describe DockingStation do
-  let(:bike) { Bike.new }
-  let(:bike2) { Bike.new }
-  let(:bike3) { Bike.new   }
+  let (:bike) {
+    bike = double (:bike)
+    allow(bike).to receive(:functional).and_return(true)
+    allow(bike).to receive(:functional=)
+    bike
+  }
+  let(:bike2) {
+    double (:bike)
+    allow(bike).to receive(:functional=)
+    bike
+  }
+  let(:bike3) {
+    double (:bike)
+    allow(bike).to receive(:functional=)
+    bike
+  }
+
+
   it { is_expected.to respond_to(:release_bike) }
 
   it "expects the bike to be working" do
