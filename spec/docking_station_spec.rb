@@ -1,10 +1,13 @@
 require "docking_station"
 
 describe DockingStation do
+  let(:bike) { Bike.new }
+  let(:bike2) { Bike.new }
+  let(:bike3) { Bike.new   }
   it { is_expected.to respond_to(:release_bike) }
 
   it "expects the bike to be working" do
-    expect(Bike.new.working?).to eq true
+    expect(bike.functional).to eq true
   end
 
   it { is_expected.to respond_to(:dock).with(1).argument }
@@ -12,13 +15,13 @@ describe DockingStation do
   it { is_expected.to respond_to(:bikes) }
 
   it "dock bike is expected to return bike" do
-    test_bike = Bike.new
+    test_bike = bike
     expect(DockingStation.new.dock(test_bike)).to eq([test_bike])
   end
 
   it "The bike method should return bike" do
     station = DockingStation.new
-    test_bike_two = Bike.new
+    test_bike_two = bike
     station.dock(test_bike_two)
     expect(station.bikes).to eq([test_bike_two])
   end
@@ -29,14 +32,13 @@ describe DockingStation do
 
   it "should return bike if bikes available" do
     station2 = DockingStation.new
-    bike = Bike.new
     station2.dock(bike)
     expect(station2.release_bike).to eq(bike)
   end
 
   it "should raise error if docking station full" do
-    20.times{subject.dock(Bike.new)}
-    expect{subject.dock(Bike.new)}.to raise_error
+    20.times{subject.dock(bike)}
+    expect{subject.dock(bike)}.to raise_error
   end
 
   it "should be able to hold 20 bikes" do
@@ -51,5 +53,20 @@ describe DockingStation do
     expect(subject.capacity).to eq(DockingStation::DEFAULT_CAPACITY)
   end
 
+  it 'should initialize with a user specified value' do
+    expect(described_class.new(5).capacity).to eq(5)
+  end
+
+  it 'should report bike broken when docked' do
+    subject.dock(bike, true)
+    expect(bike.functional).to be true
+  end
+
+  it 'should only release working bikes' do
+    subject.dock(bike, true)
+    subject.dock(bike2, false)
+    subject.dock(bike3, true)
+    expect(subject.release_bike).to eq(bike)
+  end
 
 end
