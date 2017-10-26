@@ -10,15 +10,12 @@ class DockingStation
     @bike
   end
 
-
-  # 'dock' used to store a bike
-  def dock(bike)
-    @bike = bike
+  def full?
+    @bike != nil
   end
 
-
-
-
-
-
+  def dock(bike)
+    raise "Docking station full" if full?  
+    @bike = bike
+  end
 end

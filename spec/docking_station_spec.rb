@@ -38,4 +38,18 @@ describe DockingStation do
     expect(station2.release_bike).to eq(bike)
   end
 
+  it "should return false if not full" do
+      expect(subject).to_not be_full
+  end
+  it "should return true if full" do
+    subject.dock(Bike.new)
+      expect(subject).to be_full
+  end
+
+  it "should raise error if docking station full" do
+    subject.dock(Bike.new)
+    expect{subject.dock(Bike.new)}.to raise_error
+  end
+
+
 end
