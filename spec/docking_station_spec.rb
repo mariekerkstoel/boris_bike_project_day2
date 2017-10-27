@@ -1,4 +1,5 @@
 require "docking_station"
+require 'vans'
 
 describe DockingStation do
   let (:bike) {
@@ -83,5 +84,14 @@ describe DockingStation do
     subject.dock(bike3, true)
     expect(subject.release_bike).to eq(bike)
   end
+
+  it 'should load faulty bikes into van' do
+    van = Van.new
+    subject.dock(bike, false)
+    expect(subject.load_bikes(van)).to eq([bike])
+  end
+
+
+
 
 end

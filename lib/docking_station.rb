@@ -1,5 +1,7 @@
 require './lib/bike.rb'
 
+
+
 class DockingStation
 
   # 'bike' to report on the bikes
@@ -26,6 +28,11 @@ class DockingStation
     bike.functional = working
     @bikes << bike
   end
+
+  def load_bikes(van)
+    van.bikes_in_van << @bikes.select{|bike| !bike.functional}
+  end
+
 
   private
 

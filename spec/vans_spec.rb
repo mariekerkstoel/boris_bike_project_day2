@@ -11,4 +11,9 @@ describe Van do
       expect(subject.bikes_in_van).to eq [bike]
     end
   end
+  describe  "#check_broken_bikes" do
+    it "should check if there are any broken bikes in docking stations"do
+    expect(subject.check_broken_bikes).to eq []
+    end
+  end
 end
