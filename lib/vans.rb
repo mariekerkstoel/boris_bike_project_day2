@@ -5,13 +5,10 @@ class Van
     @bikes_in_van = []
   end
 
-  def take(bike)
-    @bikes_in_van.push(bike)
-  end
+  # def take(bike)
+  #   @bikes_in_van.push(bike)
+  # end
 
-  def check_broken_bikes
-      []
-  end
 
 
 end

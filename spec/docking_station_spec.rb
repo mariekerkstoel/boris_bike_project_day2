@@ -1,6 +1,7 @@
 require "docking_station"
 require 'vans'
 
+
 describe DockingStation do
   let (:bike) {
     bike = double (:bike)
@@ -8,6 +9,13 @@ describe DockingStation do
     allow(bike).to receive(:functional=)
     bike
   }
+  let (:broken_bike) {
+    broken_bike = double (:bike)
+    allow(broken_bike).to receive(:functional).and_return(false)
+    allow(broken_bike).to receive(:functional=)
+    broken_bike
+  }
+
   let(:bike2) {
     double (:bike)
     allow(bike).to receive(:functional=)
@@ -87,11 +95,8 @@ describe DockingStation do
 
   it 'should load faulty bikes into van' do
     van = Van.new
-    subject.dock(bike, false)
-    expect(subject.load_bikes(van)).to eq([bike])
+    subject.dock(broken_bike)
+    expect(subject.load_bikes(van)).to eq([broken_bike])
   end
-
-
-
 
 end
