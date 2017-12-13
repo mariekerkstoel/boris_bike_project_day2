@@ -5,7 +5,7 @@ describe DockingStation do
   let (:bike) {
     bike = double (:bike)
     allow(bike).to receive(:functional).and_return(true)
-    allow(bike).to receive(:functional=)
+    allow(bike).to receive(:functional=).and_return(false)
     bike
   }
   let(:bike2) {
@@ -18,8 +18,11 @@ describe DockingStation do
     allow(bike).to receive(:functional=)
     bike
   }
-
-
+  let(:bike4) {
+    double (:bike)
+    allow(bike).to receive(:functional).and_return(false)
+    bike
+  }
   it { is_expected.to respond_to(:release_bike) }
 
   it "expects the bike to be working" do
@@ -87,8 +90,11 @@ describe DockingStation do
 
   it 'should load faulty bikes into van' do
     van = Van.new
-    subject.dock(bike, false)
-    expect(subject.load_bikes(van)).to eq([bike])
+    subject.dock(bike4, false)
+    subject.load_bikes(van)
+    p "LOOOOK HERE! "
+    p bike4.functional
+    expect(van.bikes_in_van).to eq([[bike4]])
   end
 
 
