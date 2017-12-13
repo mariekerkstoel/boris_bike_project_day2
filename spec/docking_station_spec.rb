@@ -1,6 +1,7 @@
 require "docking_station"
 require 'vans'
 
+
 describe DockingStation do
   let (:bike) {
     bike = double (:bike)
@@ -8,6 +9,13 @@ describe DockingStation do
     allow(bike).to receive(:functional=).and_return(false)
     bike
   }
+  let (:broken_bike) {
+    broken_bike = double (:bike)
+    allow(broken_bike).to receive(:functional).and_return(false)
+    allow(broken_bike).to receive(:functional=)
+    broken_bike
+  }
+
   let(:bike2) {
     double (:bike)
     allow(bike).to receive(:functional=)
@@ -92,12 +100,6 @@ describe DockingStation do
     van = Van.new
     subject.dock(bike4, false)
     subject.load_bikes(van)
-    p "LOOOOK HERE! "
-    p bike4.functional
-    expect(van.bikes_in_van).to eq([[bike4]])
+    expect(van.bikes_in_van).to eq([bike4])
   end
-
-
-
-
 end

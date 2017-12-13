@@ -30,7 +30,10 @@ class DockingStation
   end
 
   def load_bikes(van)
-    van.bikes_in_van << @bikes.select{|bike| !bike.functional}
+    @bikes.each do |bike|
+      van.bikes_in_van << bike unless bike.functional
+    end
+    return van.bikes_in_van
   end
 
 
